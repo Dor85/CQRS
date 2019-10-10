@@ -1,0 +1,19 @@
+﻿version: '3.7'
+services:
+    mariadb:
+        image: mariadb:10.3
+        container_name: mariadb
+        ports:
+            - 3306:3306
+        networks:
+            - dev-network
+        volumes:
+            - db-data:/var/lib/mysql/data
+        restart: on-failure
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+volumes:
+    db-data:
+
+networks:
+    dev-network:
