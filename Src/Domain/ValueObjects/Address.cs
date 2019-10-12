@@ -55,7 +55,7 @@ namespace Company.Project.Domain.ValueObjects
                 {
                     throw new InvalidEnumArgumentException();
                 }
-                address = new Address(split[0], split[1], split[2], split[3], split[4]);
+                address = new Address(split[0].Trim(), split[1].Trim(), split[2].Trim(), split[3].Trim(), split[4].Trim());
             }
             catch (Exception ex)
             {

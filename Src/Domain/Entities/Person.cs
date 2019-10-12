@@ -12,7 +12,6 @@ namespace Company.Project.Domain.Entities
         public string LastName { get; set; }
         public DateTime Dob { get; set; }
         public Address Address { get; set; }
-        public Person Partner { get; set; }
 
         public ICollection<Task> Tasks { get; }
 
