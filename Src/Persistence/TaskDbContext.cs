@@ -4,17 +4,21 @@ using Company.Project.Common;
 using System.Threading.Tasks;
 using System.Threading;
 using Company.Project.Domain.Common;
+using Company.Project.Domain.Entities;
 
 namespace Company.Project.Persistence
 {
-    public class TaskDbContext : DbContext
+    public class TaskDbContext : DbContext, IDbContext
     {
 
         private ICurrentUserService CurrentUserService { get; }
         private IDateTime DateTime { get; }
-        public TaskDbContext(DbContextOptions<TaskDbContext> options) : base(options){}
+        public DbSet<Person> People { get; set; }
+        public DbSet<Domain.Entities.Task> Tasks { get; set; }
 
-        public TaskDbContext(DbContextOptions<TaskDbContext> options, 
+        public TaskDbContext(DbContextOptions<TaskDbContext> options) : base(options) { }
+
+        public TaskDbContext(DbContextOptions<TaskDbContext> options,
             ICurrentUserService currentService,
             IDateTime dateTime) : base(options)
         {

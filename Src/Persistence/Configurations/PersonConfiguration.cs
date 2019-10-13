@@ -21,9 +21,9 @@ namespace Company.Project.Persistence.Configurations
                 .IsRequired()
                 .HasMaxLength(30);
 
-            //builder.OwnsOne(e => e.Address)
-            //    .Property(p => p.State)
-            //    .HasColumnName("AutonomousCommunity");
+            builder
+                .OwnsOne(e => e.Address);
+
 
         }
     }

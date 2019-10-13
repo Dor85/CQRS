@@ -10,12 +10,12 @@ namespace Company.Project.Persistence
 {
     public abstract class DesignTimeDbContextFactoryBase<TContext> : IDesignTimeDbContextFactory<TContext> where TContext : DbContext
     {
-        private const string ConnectionStringName = "NorthwindDatabase";
+        private const string ConnectionStringName = "TaskManagerDatabase";
         private const string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
         public TContext CreateDbContext(string[] args)
         {
-            var basePath = Path.Combine(Directory.GetCurrentDirectory(), $"{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}Api");
-            return Create(basePath, Environment.GetEnvironmentVariable(AspNetCoreEnvironment));
+            //var basePath = Path.Combine(Directory.GetCurrentDirectory(), $"{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}Api");
+            return Create(Directory.GetCurrentDirectory(), Environment.GetEnvironmentVariable(AspNetCoreEnvironment));
         }
 
         protected abstract TContext CreateNewInstance(DbContextOptions<TContext> options);
@@ -46,7 +46,7 @@ namespace Company.Project.Persistence
 
             var optionsBuilder = new DbContextOptionsBuilder<TContext>();
 
-            optionsBuilder.UseMySql(connectionString);
+            optionsBuilder.UseMySql(connectionString, b => b.MigrationsAssembly("Company.Project.Persistence"));
 
             return CreateNewInstance(optionsBuilder.Options);
         }
