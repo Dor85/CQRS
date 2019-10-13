@@ -16,6 +16,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Company.Project.Api.Middleware;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Company.Project.Api
 {
@@ -35,7 +36,13 @@ namespace Company.Project.Api
             services.AddPersistence(Configuration);
             services.AddApplication();
 
-            //services.AddHealthChecks().AddDbContextCheck<TaskDbContext>();
+            //TODO: to use this, need to create an IHealthCheck implementation on my project.
+            //services.AddHealthChecks()
+            //    .AddCheck<TaskDbContext>("MySql",
+            //        failureStatus: HealthStatus.Unhealthy,
+            //        tags: new[] { "Db", "MySQL" });
+
+
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddHttpContextAccessor();
 
@@ -63,7 +70,9 @@ namespace Company.Project.Api
 
             app.UseCustomExceptionHandler();
             app.UseStaticFiles();
+
             //app.UseHealthChecks("/health");
+
             app.UseOpenApi();
             app.UseSwaggerUi3(settings =>
             {

@@ -22,7 +22,25 @@ namespace Company.Project.Persistence.Configurations
                 .HasMaxLength(30);
 
             builder
-                .OwnsOne(e => e.Address);
+                .OwnsOne(e => e.Address)
+                .Property(p => p.Street)
+                .HasColumnName("Street");
+            builder
+                .OwnsOne(e => e.Address)
+                .Property(p => p.City)
+                .HasColumnName("City");
+            builder
+                .OwnsOne(e => e.Address)
+                .Property(p => p.State)
+                .HasColumnName("State");
+            builder
+                .OwnsOne(e => e.Address)
+                .Property(p => p.Country)
+                .HasColumnName("Country");
+            builder
+                .OwnsOne(e => e.Address)
+                .Property(p => p.ZipCode)
+                .HasColumnName("ZipCode");
 
 
         }
