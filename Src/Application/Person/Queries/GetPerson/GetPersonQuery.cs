@@ -1,5 +1,5 @@
 ﻿using System;
-using Company.Project.Application.Person.Queries.GetPersonList;
+using Company.Project.Application.Person.Queries.Models;
 using MediatR;
 
 namespace Company.Project.Application.Person.Queries.GetPerson

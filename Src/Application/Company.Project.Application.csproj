@@ -22,6 +22,7 @@
     <Folder Include="Notifications\Models\" />
     <Folder Include="Task\Commands\" />
     <Folder Include="Person\Queries\GetPerson\" />
+    <Folder Include="Person\Queries\Models\" />
   </ItemGroup>
 
   <ItemGroup>

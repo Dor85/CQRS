@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Company.Project.Application.Person.Commands;
 using Company.Project.Application.Person.Queries.GetPerson;
 using Company.Project.Application.Person.Queries.GetPersonList;
+using Company.Project.Application.Person.Queries.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Company.Project.Api.Controllers
@@ -11,7 +12,7 @@ namespace Company.Project.Api.Controllers
     {
 
         [HttpGet]
-        public async Task<ActionResult<PersonListViewModel>> GetPeopleList()
+        public async Task<ActionResult<PersonListViewModel>> GetPersonList()
         {
             return Ok(await Mediator.Send(new GetPersonListQuery()));
         }

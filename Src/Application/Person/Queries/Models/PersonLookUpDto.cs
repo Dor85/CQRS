@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using PersonEntity = Company.Project.Domain.Entities.Person;
 
-namespace Company.Project.Application.Person.Queries.GetPersonList
+namespace Company.Project.Application.Person.Queries.Models
 {
     public class PersonLookupDto : IMapFrom<PersonEntity>
     {

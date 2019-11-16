@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Company.Project.Application.Common.Interfaces;
+using Company.Project.Application.Person.Queries.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;

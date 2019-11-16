@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Company.Project.Application.Common.Interfaces;
-using Company.Project.Application.Person.Queries.GetPersonList;
+using Company.Project.Application.Person.Queries.Models;
 using MediatR;
 
 namespace Company.Project.Application.Person.Queries.GetPerson
