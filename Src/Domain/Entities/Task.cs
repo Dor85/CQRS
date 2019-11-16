@@ -10,13 +10,17 @@ namespace Company.Project.Domain.Entities
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public TaskEnum Status { get; }
-        public Person Resposable { get; set; }
+        public TaskEnum Status { get; set; }
+
+        public int ResponsableId { get; set; }
+        public Person Responsable { get; set; }
+
+        public int AssignedId { get; set; }
         public Person Assigned { get; set; }
 
         public string GetResponsableName()
         {
-            return Resposable.GetFullName();
+            return Responsable.GetFullName();
         }
 
         public string GetAssigneeName()

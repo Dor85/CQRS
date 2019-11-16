@@ -5,12 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+using SystemTask = System.Threading.Tasks.Task;
 
 namespace Company.Project.Application.Common.Behaviours
 {
     public class RequestLogger<TRequest> : IRequestPreProcessor<TRequest>
-    {       
+    {
         private ILogger<TRequest> Logger { get; }
         private ICurrentUserService CurrentUserService { get; }
         public RequestLogger(ILogger<TRequest> logger, ICurrentUserService currentUserService)
@@ -18,13 +18,13 @@ namespace Company.Project.Application.Common.Behaviours
             Logger = logger;
             CurrentUserService = currentUserService;
         }
-        public Task Process(TRequest request, CancellationToken cancellationToken)
+        public SystemTask Process(TRequest request, CancellationToken cancellationToken)
         {
             var name = typeof(TRequest).Name;
 
             Logger.LogInformation("Request: {Name} {@UserId} {@Request}", name, CurrentUserService.GetUserId(), request);
 
-            return Task.CompletedTask;
+            return SystemTask.CompletedTask;
         }
     }
 }

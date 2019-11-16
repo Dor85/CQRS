@@ -19,8 +19,9 @@ namespace Company.Project.Persistence.Configurations
                 .IsRequired()
                 .HasMaxLength(30);
 
+            builder.Property(e => e.Status).HasColumnType("varchar(10)");
 
-            builder.HasOne(e => e.Resposable);
+            builder.HasOne(e => e.Responsable);
             builder.HasOne(e => e.Assigned);
         }
     }
