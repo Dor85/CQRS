@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace Company.Project.Application.Person.Commands
+namespace Company.Project.Application.Person.Commands.Create
 {
     public class CreatePersonCommand : IRequest
     {

@@ -6,7 +6,7 @@ using Company.Project.Domain.ValueObjects;
 using MediatR;
 using PersonEntity = Company.Project.Domain.Entities.Person;
 
-namespace Company.Project.Application.Person.Commands
+namespace Company.Project.Application.Person.Commands.Create
 {
     public class CreatePersonCommandHandler : IRequestHandler<CreatePersonCommand>
     {

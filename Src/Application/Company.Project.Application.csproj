@@ -23,6 +23,9 @@
     <Folder Include="Task\Commands\" />
     <Folder Include="Person\Queries\GetPerson\" />
     <Folder Include="Person\Queries\Models\" />
+    <Folder Include="Person\Commands\Update\" />
+    <Folder Include="Person\Commands\Delete\" />
+    <Folder Include="Person\Commands\Create\" />
   </ItemGroup>
 
   <ItemGroup>
