@@ -3,7 +3,11 @@ using Company.Project.Domain.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Xml.Schema;
+using System.Linq;
 
 namespace Company.Project.Domain.ValueObjects
 {
@@ -18,11 +22,11 @@ namespace Company.Project.Domain.ValueObjects
         public Address() { }
         public Address(string street, string city, string state, string country, string zipcode)
         {
-            Street = street;
-            City = city;
-            State = state;
-            Country = country;
-            ZipCode = zipcode;
+            Street = Validate(street, CONSTANT.streetRegex, nameof(street));
+            City = Validate(city, CONSTANT.CountryStateRegex, nameof(city));
+            State = Validate(state, CONSTANT.CountryStateRegex, nameof(state));
+            Country = Validate(country, CONSTANT.CountryStateRegex, nameof(country));
+            ZipCode = Validate(zipcode, CONSTANT.zipCodeRegex, nameof(zipcode));
         }
         protected override IEnumerable<object> GetAtomicValues()
         {
@@ -50,11 +54,12 @@ namespace Company.Project.Domain.ValueObjects
             Address address;
             try
             {
-                var split = addressString.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] split = addressString.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 if (split.Length < 5)
                 {
                     throw new InvalidEnumArgumentException();
                 }
+
                 address = new Address(split[0].Trim(), split[1].Trim(), split[2].Trim(), split[3].Trim(), split[4].Trim());
             }
             catch (Exception ex)
@@ -62,6 +67,15 @@ namespace Company.Project.Domain.ValueObjects
                 throw new InvalidAddressString("The address param is not valid", ex);
             }
             return address;
+        }
+        private static string Validate(string input, string pattern, string element)
+        {
+            if (!Regex.IsMatch(input, pattern))
+            {
+                throw new InvalidEnumArgumentException($"Invalid value: {input} for {element}");
+            }
+
+            return input;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using Company.Project.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Builder;
@@ -53,11 +54,26 @@ namespace Company.Project.Api.Middleware
 
             if (result == string.Empty)
             {
-                result = JsonConvert.SerializeObject(new { error = exception.Message });
+                result = JsonConvert.SerializeObject(new { error = GetCustomErrorMessage(exception) });
             }
 
             return context.Response.WriteAsync(result);
         }
+
+
+        private string GetCustomErrorMessage(Exception exception)
+        {
+            StringBuilder builder = new StringBuilder();
+
+            if (exception.InnerException != null)
+            {
+                builder.Append(GetCustomErrorMessage(exception.InnerException));
+            }
+            builder.Append($"{exception.Message} --> ");
+
+            return builder.ToString();
+        }
+
     }
 
     public static class CustomExceptionHandlerMiddlewareExtensions
