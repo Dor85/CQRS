@@ -4,14 +4,31 @@ services:
         image: mariadb:10.3
         container_name: mariadb
         ports:
-            - 3306:3306
+            - "3306:3306"
         networks:
             - dev-network
         volumes:
-            - db-data:/var/lib/mysql/data
-        restart: on-failure
+            - db-data:/var/lib/mysql
+        restart: always
         environment:
-            MYSQL_ROOT_PASSWORD: root
+            MYSQL_RANDOM_ROOT_PASSWORD: !!str yes
+            MYSQL_DATABASE: TaskDb
+            MYSQL_USER: docker-user
+            MYSQL_PASSWORD: docker-user-password
+    taskapp:
+        build: 
+            context: .
+            dockerfile: ./Src/Api/Dockerfile
+        container_name: taskapp
+        ports: 
+            - "59851:80"
+        links: 
+            - mariadb:mariadb
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Docker
+        networks: 
+            - dev-network
+        restart: always
 volumes:
     db-data:
 
